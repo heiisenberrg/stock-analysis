@@ -11,8 +11,8 @@ const setupInterceptors = store => {
   axios.defaults.validateStatus = () => true;
 
   axios.interceptors.request.use(
-    config => config
-    , error => Promise.reject(error),
+    config => config,
+    error => Promise.reject(error)
   );
 
   axios.interceptors.response.use(response => {

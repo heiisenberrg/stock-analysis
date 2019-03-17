@@ -20,9 +20,10 @@ const deleteItem = name => {
  * @param name
  */
 const clearStorage = () => {
-  for(const item of Object.keys(localStorage)) {
+  Object.keys(localStorage).map(item => {
     this.deleteItem(item);
-  }
+    return true;
+  });
 };
 
 /**

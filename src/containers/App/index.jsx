@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import Routes from '../../routes/index';
+// import Routes from '../../routes/index';
 
-const App = props => (
+const App = () => (
   <Fragment>
     {/* <NavBar key="nav"/> */}
     <div className="container-fluid">
@@ -13,7 +13,7 @@ const App = props => (
         {/* <Routes key="logged-in-routes"/> */}
       </div>
     </div>
- </Fragment>
+  </Fragment>
 );
 
 export default withRouter(connect(null, null)(App));

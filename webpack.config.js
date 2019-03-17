@@ -1,8 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-
 // Is the current build a development build
 const IS_DEV = (process.env.NODE_ENV === 'dev');
 
@@ -76,7 +74,7 @@ module.exports = {
       },
       inject: true,
       hash: true,
-      title: 'Expense-Tracker-Web',
+      title: 'Stock-Analysis-Web',
       files: {
         css: ['[name].bundle.css'],
         js: ['[name].bundle.js'],
@@ -91,11 +89,6 @@ module.exports = {
           }
         }
       }
-    }),
-
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      openAnalyzer: false
     }),
 
     new ExtractTextPlugin({
