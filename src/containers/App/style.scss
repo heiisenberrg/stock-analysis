@@ -1,0 +1,16 @@
+.main {
+  padding: 0px 30px;
+  margin: 15px 0px;
+  .button-groups {
+    justify-content: flex-end;
+  }
+  .custom-dropdown {
+    width: 400px;
+  }
+  .btn {
+    margin: 0 10px;
+    padding: 0.2rem 0.5rem;
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
