@@ -10,7 +10,8 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  // ResponsiveContainer,
+  Label,
+  ResponsiveContainer,
   BarChart, Bar
   // Bar, Cell
 } from 'recharts';
@@ -66,80 +67,104 @@ class App extends React.PureComponent {
     return (
       <Fragment>
         <AppHeader />
-        <div className="container-fluid">
-          <div className="main row">
-            <div className="col-md-6">
-              <Select
-                value={selectedOption}
-                onChange={this.handleChange}
-                options={stocks}
-                isMulti="true"
-                isSearchable="true"
-                placeholder=""
-                className="custom-dropdown"
-              />
-            </div>
-            <div className="col-md-6 button-groups d-flex">
-              <button type="button" className="btn btn-primary">Real Time</button>
-              <button type="button" className="btn btn-secondary">1 D</button>
-              <button type="button" className="btn btn-secondary">5 D</button>
-              <button type="button" className="btn btn-secondary">1 M</button>
-              <button type="button" className="btn btn-secondary">YTD</button>
+        <div className="container-fluid pb-3">
+          <div className="main">
+            <div className="row">
+              <div className="col-md-6">
+                { stocks && stocks.length > 0
+                  && (
+                  <Select
+                    value={selectedOption}
+                    classNamePrefix="select"
+                    onChange={this.handleChange}
+                    options={stocks}
+                    isMulti
+                    isDisabled={false}
+                    isLoading={false}
+                    // isClearable={true}
+                    isSearchable="true"
+                    placeholder=""
+                    className="custom-dropdown"
+                    components={
+                      {
+                        DropdownIndicator: () => null,
+                        IndicatorSeparator: () => null,
+                        ClearIndicator: () => null
+                      }
+                    }
+                  />
+                  )
+                }
+              </div>
+              <div className="col-md-6 button-groups d-flex">
+                <button type="button" className="btn btn-primary">Real Time</button>
+                <button type="button" className="btn btn-secondary">1 D</button>
+                <button type="button" className="btn btn-secondary">5 D</button>
+                <button type="button" className="btn btn-secondary">1 M</button>
+                <button type="button" className="btn btn-secondary">YTD</button>
+              </div>
             </div>
           </div>
-          <div id="chart-container" className="row d-flex">
-            {/* <ResponsiveContainer> */}
-            <div className="col-md-6">
-              <LineChart
-                width={500}
-                height={300}
-                data={this.expenses}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5
-                }}
-              >
-                {/* <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="label" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line
-                  // activeDot={{ onClick: handleDataClick }}
-                  dot={{ strokeWidth: 2 }}
-                  type="monotone"
-                  dataKey="value"
-                /> */}
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-              </LineChart>
-            </div>
-            <div className="col-md-6">
-              <BarChart
-                width={1000}
-                height={700}
-                data={sectors}
-                margin={{
-                  top: 5, right: 30, left: 20, bottom: 5
-                }}
-                stackOffset="expand"
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis dataKey="value" />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="value" fill="#8884d8" />
-              </BarChart>
-            </div>
-            {/* </ResponsiveContainer> */}
+          <div id="line-chart-container" className="row">
+            <ResponsiveContainer>
+              <div className="col-12">
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={this.expenses}
+                  margin={{
+                    top: 15,
+                    right: 30,
+                    left: 20,
+                    bottom: 15
+                  }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+                  <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                </LineChart>
+              </div>
+            </ResponsiveContainer>
+          </div>
+          <div id="bar-chart-container" className="row">
+            <ResponsiveContainer>
+              <div className="col-12">
+                <BarChart
+                  width={700}
+                  height={500}
+                  data={sectors}
+                  margin={{
+                    top: 100, right: 20, bottom: 10, left: 10
+                  }}
+                  barGap={1}
+                  // layout="vertical"
+                >
+                  <CartesianGrid vertical={false} />
+                  <XAxis
+                    type="category"
+                    dataKey="name"
+                    orientation="top"
+                    padding={{ left: 10 }}
+                    angle={-45}
+                    interval={0}
+                    textAnchor="start"
+                    axisLine="false"
+                  />
+                  <YAxis>
+                    <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>
+                    Vertical Label!
+                    </Label>
+                  </YAxis>
+                  <Tooltip />
+                  <Legend verticalAlign="bottom" height={36} />
+                  <Bar dataKey="value" barSize={20} fill="#8884d8" />
+                </BarChart>
+              </div>
+            </ResponsiveContainer>
           </div>
         </div>
       </Fragment>

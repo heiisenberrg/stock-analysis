@@ -5,7 +5,7 @@
     justify-content: flex-end;
   }
   .custom-dropdown {
-    width: 400px;
+    width: 800px;
   }
   .btn {
     margin: 0 10px;
@@ -13,4 +13,37 @@
     background-color: #ffffff;
     color: #000000;
   }
+  .recharts-cartesian-axis-tick {    
+    font-size: 1.4rem;
+    font-family: Roboto, sans-serif;
+}
+}
+
+.hide-options .Select-arrow-zone {
+  display: none;
+}
+
+.hide-options .Select-menu-outer {
+  display: none;
+}
+
+#line-chart-container {
+  width: 60%;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-shadow: 0px 0px 15px rgba(0,0,0,.25);
+  margin: auto;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+#bar-chart-container {
+  width: 60%;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-shadow: 0px 0px 15px rgba(0,0,0,.25);
+  margin: auto;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
