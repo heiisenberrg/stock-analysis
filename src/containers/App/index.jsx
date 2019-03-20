@@ -23,6 +23,7 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      filter: '',
       selectedOption: []
     };
     this.options = [
@@ -55,15 +56,22 @@ class App extends React.PureComponent {
     ];
   }
 
-  handleChange = selectedOption => {
-    console.log(selectedOption);
+  handleChange = option => {
+    if (option && option.length < 4) {
+      this.setState({
+        selectedOption: option
+      });
+    }
+  }
+
+  handleClick = option => {
     this.setState({
-      selectedOption
+      filter: option
     });
   }
 
   render() {
-    const { selectedOption } = this.state;
+    const { selectedOption, filter } = this.state;
     return (
       <Fragment>
         <AppHeader />
@@ -97,23 +105,23 @@ class App extends React.PureComponent {
                 }
               </div>
               <div className="col-md-6 button-groups d-flex">
-                <button type="button" className="btn btn-primary">Real Time</button>
-                <button type="button" className="btn btn-secondary">1 D</button>
-                <button type="button" className="btn btn-secondary">5 D</button>
-                <button type="button" className="btn btn-secondary">1 M</button>
-                <button type="button" className="btn btn-secondary">YTD</button>
+                <button type="button" className={filter === 'Real Time' ? '' : 'btn btn-primary'} onClick={e => this.handleClick('Real Time')}>Real Time</button>
+                <button type="button" className="btn btn-secondary" onClick={() => this.handleClick('1D')}>1 D</button>
+                <button type="button" className="btn btn-secondary" onClick={() => this.handleClick('5D')}>5 D</button>
+                <button type="button" className="btn btn-secondary" onClick={() => this.handleClick('1M')}>1 M</button>
+                <button type="button" className="btn btn-secondary" onClick={() => this.handleClick('YTD')}>YTD</button>
               </div>
             </div>
           </div>
           <div id="line-chart-container" className="row">
             <ResponsiveContainer>
-              <div className="col-12">
+              <div className="col-12 p-30">
                 <LineChart
-                  width={500}
-                  height={300}
+                  width={1000}
+                  height={500}
                   data={this.expenses}
                   margin={{
-                    top: 15,
+                    top: 45,
                     right: 30,
                     left: 20,
                     bottom: 15
@@ -132,13 +140,13 @@ class App extends React.PureComponent {
           </div>
           <div id="bar-chart-container" className="row">
             <ResponsiveContainer>
-              <div className="col-12">
+              <div className="col-12 p-30">
                 <BarChart
-                  width={700}
+                  width={1000}
                   height={500}
                   data={sectors}
                   margin={{
-                    top: 100, right: 20, bottom: 10, left: 10
+                    top: 130, right: 30, bottom: 10, left: 20
                   }}
                   barGap={1}
                   // layout="vertical"
